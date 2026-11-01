@@ -6,8 +6,8 @@
 
    - 47k potentiometer = THROTTLE PEDAL (GPIO4)
    - 6 relays = 6 CYLINDERS
-   - 10 Hz (pot = 0 ohm)  -> idle   (~200 RPM)
-   - 50 Hz (pot = 47k)    -> redline (~1000 RPM sound pitch)
+   - 30 Hz (pot = 0 ohm)  -> idle   (~600 RPM)
+   - 90 Hz (pot = 47k)    -> redline (~1800 RPM sound pitch)
      (A 4-stroke V6 fires 3 times per revolution:
       firing Hz = RPM / 60 * 3)
 
@@ -20,7 +20,7 @@
 
    WARNING: Run the relays with NO load / no mains voltage
             (sound effect only). Mechanical relays wear out fast
-            at 10-50 Hz. Use cheap relays you can replace.
+            at 30-90 Hz. Use cheap relays you can replace.
   ============================================================
 */
 
@@ -32,8 +32,8 @@ const int RELAY_PINS[6] = {16, 17, 18, 19, 21, 22};  // Cylinders 1..6
 
 // ---------------- Settings ----------------
 const bool  RELAY_ACTIVE_LOW = false;  // true for active-LOW relay modules
-const float FREQ_MIN = 10.0;           // Hz at R = 0   (idle)
-const float FREQ_MAX = 50.0;           // Hz at R = 47k (full throttle)
+const float FREQ_MIN = 30.0;           // Hz at R = 0   (idle)
+const float FREQ_MAX = 90.0;           // Hz at R = 47k (full throttle)
 const int   ADC_MAX  = 4095;
 const int   SAMPLES  = 16;
 const float SMOOTH   = 0.1;            // lower = smoother throttle response
@@ -46,7 +46,7 @@ const int FIRING_ORDER[6] = {0, 3, 1, 4, 2, 5};
 // ---------------- Variables ----------------
 float filteredAdc = 0;
 float frequency   = FREQ_MIN;
-unsigned long halfPeriodUs = 50000;
+unsigned long halfPeriodUs = 16666;
 unsigned long lastToggleUs = 0;
 unsigned long lastPrintMs  = 0;
 bool phaseOn   = false;

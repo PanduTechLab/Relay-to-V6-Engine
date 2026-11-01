@@ -15,20 +15,20 @@ This is an **ESP32-powered V6 engine sound simulator**. Six relays act as six cy
 
 | Throttle (Pot) | Relay firing rate | Engine feel |
 |---|---|---|
-| 0 Ω (foot off) | **10 Hz** | 🐢 Idle, ~200 RPM |
-| 23.5 kΩ (half) | **~30 Hz** | 🚗 Cruising, ~600 RPM |
-| 47 kΩ (floored) | **50 Hz** | 🚀 Screaming, ~1000 RPM pitch |
+| 0 Ω (foot off) | **30 Hz** | 🐢 Idle, ~600 RPM |
+| 23.5 kΩ (half) | **~60 Hz** | 🚗 Cruising, ~1200 RPM |
+| 47 kΩ (floored) | **90 Hz** | 🚀 Screaming, ~1800 RPM pitch |
 
 Why the RPM numbers? A 4-stroke V6 fires **3 times per revolution**, so `firing Hz = RPM / 60 × 3`.
 
-Formula in code: `f = 10 + (ADC / 4095) × 40`
+Formula in code: `f = 30 + (ADC / 4095) × 60`
 
 ---
 
 ## ⚠️ Read This Before You Burn Your Relays
 
 - **Sound-effect only!** Run the relays with **no load and no mains voltage**.
-- Mechanical relays are rated for ~10 switches per second. At 10–50 Hz they will buzz, chatter and **wear out quickly**. That's what makes the sound, but use cheap, replaceable relays.
+- Mechanical relays are rated for ~10 switches per second. At 30–90 Hz they will buzz, chatter and **wear out quickly**. That's what makes the sound, but use cheap, replaceable relays.
 - Want the same control without the clicking (e.g. real loads)? Swap in a **6-channel SSR/MOSFET board**. Wiring and code stay the same.
 - Put the relays in a box or on a soft surface so the vibration doesn't walk them off the desk.
 
@@ -109,7 +109,7 @@ Formula in code: `f = 10 + (ADC / 4095) × 40`
 flowchart LR
     A[🦶 47k Pot<br/>Throttle Pedal] --> B[ESP32 ADC<br/>GPIO4]
     B --> C[Smoothing<br/>Filter]
-    C --> D[Throttle to Hz<br/>10 - 50 Hz]
+    C --> D[Throttle to Hz<br/>30 - 90 Hz]
     D --> E[Engine Timer<br/>micros&#40;&#41;]
     E --> F[Firing Order<br/>1-4-2-5-3-6]
     F --> G[6 Relays<br/>= 6 Cylinders]
@@ -123,10 +123,10 @@ flowchart LR
 
 1. **Throttle input:** the pot works as a voltage divider (0–3.3 V). The ESP32's 12-bit ADC reads it as 0–4095.
 2. **Smoothing:** 16 samples are averaged and filtered so the throttle feels like a real pedal without jitter.
-3. **Throttle → Hz:** `f = 10 + (ADC/4095) × 40` gives 10 Hz (idle) to 50 Hz (full throttle).
+3. **Throttle → Hz:** `f = 30 + (ADC/4095) × 60` gives 30 Hz (idle) to 90 Hz (full throttle).
 4. **Engine timer:** the half period is `1,000,000 / (2f)` µs. A non-blocking `micros()` timer keeps timing accurate while the pot is read at the same time.
 5. **Firing order:** in **V6 mode (MODE 1)** the relays fire one by one in order 1-4-2-5-3-6, so you get the lumpy V6 rhythm instead of a single buzz. In **MODE 0** all six fire together.
-6. **Sound:** each relay clicks on fire and clicks again on release. At 10 Hz you hear a choppy idle, and at 50 Hz the clicks blur into a raspy engine scream.
+6. **Sound:** each relay clicks on fire and clicks again on release. At 30 Hz you hear a choppy idle, and at 90 Hz the clicks blur into a raspy engine scream.
 7. **Dashboard:** the Serial Monitor shows throttle %, frequency and estimated RPM.
 
 ---
@@ -145,7 +145,7 @@ flowchart LR
 |---|---|---|
 | `MODE` | 1 | 0 = all relays together, 1 = V6 firing order |
 | `FIRING_ORDER` | 1-4-2-5-3-6 | Change the order for a different engine rhythm |
-| `FREQ_MIN` / `FREQ_MAX` | 10 / 50 | Idle and redline frequency |
+| `FREQ_MIN` / `FREQ_MAX` | 30 / 90 | Idle and redline frequency |
 | `SMOOTH` | 0.1 | Throttle response (lower = smoother) |
 | `RELAY_ACTIVE_LOW` | false | Set `true` for active-LOW modules |
 
