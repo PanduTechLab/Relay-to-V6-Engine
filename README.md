@@ -4,8 +4,8 @@
 
 > Turn a bunch of clicking relays into a **screaming V6 engine** with a single potentiometer as your **throttle pedal**. Twist it, rev it, make your neighbours question everything.
 
-[![YouTube](https://img.shields.io/badge/YouTube-Subscribe-red?logo=youtube&logoColor=white)](YOUR_YOUTUBE_CHANNEL_LINK)
-[![Instagram](https://img.shields.io/badge/Instagram-Follow-E4405F?logo=instagram&logoColor=white)](YOUR_INSTAGRAM_LINK)
+[![YouTube](https://img.shields.io/badge/YouTube-Subscribe-red?logo=youtube&logoColor=white)](https://youtube.com/@pandustechlab?si=UCFYn3FYFlSZL5W3)
+[![Instagram](https://img.shields.io/badge/Instagram-Follow-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/pandutechlab/)
 
 ---
 
