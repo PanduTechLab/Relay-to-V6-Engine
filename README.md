@@ -146,8 +146,8 @@ Formula in code: `f = 30 + (ADC / 4095) × 60`
 
 Watch the build, hear the engine, and see more crazy projects:
 
-- ▶️ **YouTube:** [@PandusTechLab](https://youtube.com/@pandustechlab?si=UCFYn3FYFlSZL5W3)
-- 📸 **Instagram:** [@PandusTechLab]([YOUR_INSTAGRAM_LINK](https://www.instagram.com/pandutechlab/))
+- ▶️ **YouTube:** [@PandusTechLab](https://youtube.com/@pandustechlab)
+- 📸 **Instagram:** [@PandusTechLab]([YOUR_INSTAGRAM_LINK](https://www.instagram.com/pandutechlab/)
 
 If you like it, **⭐ star the repo** and **subscribe**!
 
