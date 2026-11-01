@@ -103,22 +103,6 @@ Formula in code: `f = 30 + (ADC / 4095) × 60`
 
 ---
 
-## 📦 Block Diagram
-
-```mermaid
-flowchart LR
-    A[🦶 47k Pot<br/>Throttle Pedal] --> B[ESP32 ADC<br/>GPIO4]
-    B --> C[Smoothing<br/>Filter]
-    C --> D[Throttle to Hz<br/>30 - 90 Hz]
-    D --> E[Engine Timer<br/>micros&#40;&#41;]
-    E --> F[Firing Order<br/>1-4-2-5-3-6]
-    F --> G[6 Relays<br/>= 6 Cylinders]
-    G --> H[🔊 V6 Click Sound]
-    B --> I[Serial Dashboard<br/>Throttle, Hz, RPM]
-```
-
----
-
 ## ⚙️ Working Mechanism
 
 1. **Throttle input:** the pot works as a voltage divider (0–3.3 V). The ESP32's 12-bit ADC reads it as 0–4095.
@@ -162,8 +146,8 @@ flowchart LR
 
 Watch the build, hear the engine, and see more crazy projects:
 
-- ▶️ **YouTube:** [YOUR_YOUTUBE_CHANNEL_LINK](YOUR_YOUTUBE_CHANNEL_LINK)
-- 📸 **Instagram:** [YOUR_INSTAGRAM_LINK](YOUR_INSTAGRAM_LINK)
+- ▶️ **YouTube:** [@PandusTechLab](https://youtube.com/@pandustechlab?si=UCFYn3FYFlSZL5W3)
+- 📸 **Instagram:** [@PandusTechLab]([YOUR_INSTAGRAM_LINK](https://www.instagram.com/pandutechlab/))
 
 If you like it, **⭐ star the repo** and **subscribe**!
 
